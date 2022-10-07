@@ -5,7 +5,6 @@ import Item from './Item.jsx';
 import Cart from './Cart.jsx';
 import About from './About.jsx';
 import NotFound from './NotFound.jsx';
-import '../styles/App.module.css';
 
 const App = () => {
   return (
