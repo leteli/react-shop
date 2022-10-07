@@ -1,0 +1,6 @@
+.navbar {
+  padding: 20px;
+  width: 100%;
+  color: var(--white);
+  background-color: var(--dark-gray);
+}
