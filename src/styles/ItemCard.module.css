@@ -1,0 +1,42 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  height: 100%;
+}
+
+.image {
+  width: 100%;
+}
+
+.title {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.price {
+  margin-bottom: 10px;
+  color: var(--gray);
+}
+
+.primaryBtn {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: var(--white);
+  background-color: var(--emerald);
+  text-transform: uppercase;
+}
+
+.disabledBtn {
+  composes: primaryBtn;
+  margin-top: auto;
+  background-color: var(--gray);
+}
+
+.addBtn {
+  composes: primaryBtn;
+  margin-top: auto;
+}
