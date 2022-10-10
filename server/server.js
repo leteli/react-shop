@@ -5,7 +5,7 @@ const port = 8080;
 
 const server = http.createServer((req, res) => {
   const state = {
-    books: [
+    products: [
       { 
         id: 1,
         name: 'Империализм в XXI веке',
@@ -111,7 +111,7 @@ const server = http.createServer((req, res) => {
     res.setHeader('Access-Control-Allow-Headers', '*');
     res.setHeader('Access-Control-Allow-Credentials', true);
 
-    res.end(JSON.stringify(state.books));
+    res.end(JSON.stringify(state.products));
   } else if (req.url === '^\/products\/id=(\d+)' && req.method === 'GET') {
     res.statusCode = 200;
     const productId = req.url.split('/').slice(-1);
