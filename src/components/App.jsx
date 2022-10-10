@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Home from './Home.jsx';
-import Item from './Item.jsx';
+import ItemPage from './ItemPage.jsx';
 import Cart from './Cart.jsx';
 import About from './About.jsx';
 import NotFound from './NotFound.jsx';
@@ -12,7 +12,7 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/item/:id" element={<Item />} />
+        <Route path="/item/:id" element={<ItemPage />} />
         <Route path="cart" element={<Cart />} />
         <Route path="/about" element={<About />} />
         <Route path="/*" element={<NotFound />} />
