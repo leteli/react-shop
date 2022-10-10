@@ -9,7 +9,7 @@ const ItemCard = ({ data }) => {
       <span>{author}</span>
       <span className={styles.price}>{price}</span>
       <button className={inStock ? styles.addBtn : styles.disabledBtn}>
-        {inStock ? 'В корзину' : 'Нет в наличии'}
+        {inStock > 0 ? 'В корзину' : 'Нет в наличии'}
       </button>
     </div>
   );
