@@ -1,7 +1,6 @@
 .card {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
   height: 100%;
 }
 
@@ -14,6 +13,7 @@
   margin-bottom: 5px;
   font-size: 18px;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .price {
