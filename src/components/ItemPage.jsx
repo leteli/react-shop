@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Layout from './Layout.jsx';
+import AddButton from './AddButton.jsx';
 import styles from '../styles/ItemPage.module.css';
 
 const ItemPage = () => {
@@ -20,7 +21,7 @@ const ItemPage = () => {
             <span className={styles.inStock}>В наличии: {inStock} шт.</span>
             <div className={styles.amount}>
               <input className={styles.counter} type="number" />
-              <button className={styles.btn}>В корзину</button>
+              <AddButton data={currentData} style={styles.btn} />
             </div>
           </div>
         </div>
