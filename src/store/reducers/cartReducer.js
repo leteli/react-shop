@@ -4,6 +4,7 @@ const cartReducer = (state = [], action) => {
       return action.payload;
     }
     case 'addedToCart': {
+      console.log([...state, action.payload]);
       return [...state, action.payload];
     }
     case 'changedAmount': {

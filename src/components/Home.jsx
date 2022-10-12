@@ -25,7 +25,7 @@ const Home = () => {
     <Layout>
       <h1 className={layout.title}>Каталог книг</h1>
       <div className={styles.itemsContainer}>
-        {products.length > 0 && products.map(product => <ItemCard key={product.id} data={product} />)}
+        {products.length > 0 && products.map((product) => <ItemCard key={product.id} data={product} />)}
       </div>
     </Layout>
   );
