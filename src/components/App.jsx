@@ -5,8 +5,11 @@ import ItemPage from './ItemPage.jsx';
 import Cart from './Cart.jsx';
 import About from './About.jsx';
 import NotFound from './NotFound.jsx';
+import LoginModal from './LoginModal.jsx';
+import useLoginModalContext from '../hooks/useLoginModalContext.js';
 
 const App = () => {
+  const { isModalOpen } = useLoginModalContext();
   return (
     <BrowserRouter>
       <NavBar />
@@ -17,6 +20,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
+      { isModalOpen && <LoginModal /> }
     </BrowserRouter>
   );
 }
