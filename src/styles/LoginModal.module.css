@@ -1,0 +1,72 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+
+  max-width: 400px;
+  width: 100%;
+
+  padding: 50px;
+  border-radius: 5px;
+  background-color: var(--white);
+}
+
+.modalBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: normal;
+  font-size: 28px;
+
+  text-align: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.loginForm label {
+  color: var(--dark-gray);
+}
+
+.loginForm input {
+  width: 100%;
+  margin-bottom: 25px;
+  padding: 1rem;
+  border: 1px solid var(--emerald);
+  border-radius: 5px;
+
+  font-size: inherit;
+  color: inherit;
+}
+
+.btnGroup {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  border: none;
+  background-color: inherit;
+}
