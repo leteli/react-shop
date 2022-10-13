@@ -12,6 +12,13 @@ export const productFetchedById = (data) => {
   };
 };
 
+export const changedAmount = (data, prevCountInCart, newCountInCart) => {
+  return {
+    type: 'changedAmount',
+    payload: { data, prevCountInCart, newCountInCart },
+  };
+};
+
 export const productEdited = (productData) => {
   return {
     type: 'productEdited',

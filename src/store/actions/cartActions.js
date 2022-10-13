@@ -6,20 +6,13 @@ const cartFetched = (data) => {
 };
   
   
-export const addedToCart = (data) => {
+export const addedToCart = (data, newCountInCart) => {
   return {
     type: 'addedToCart',
-    payload: data,
+    payload: { data, newCountInCart },
   };
 };
 
-export const changedAmount = (id, newCount) => {
-  return {
-    type: 'changedAmount',
-    payload: { id, newCount },
-  };
-};
-  
 export const deletedFromCart = (id) => {
   return {
     type: 'deletedFromCart',
