@@ -1,9 +1,12 @@
-import Express from 'express';
-import getData from './mockDB.js';
-import cors from 'cors';
-const app = new Express();
+const express = require('express');
+const path = require('path');
+
+const { getData } = require('./mockDB.js');
+const cors = require('cors');
+const app = express();
 app.use(cors());
-app.use(Express.json());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 const state = getData();
 
@@ -64,8 +67,8 @@ app.post('/auth', (req, res) => { // ADD TOKEN!!
   }
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
   
