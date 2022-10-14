@@ -38,6 +38,7 @@
 .loginForm {
   display: flex;
   flex-direction: column;
+  gap: 15px;
   width: 100%;
 }
 
@@ -47,9 +48,7 @@
 
 .loginForm input {
   width: 100%;
-  margin-bottom: 25px;
   padding: 1rem;
-  border: 1px solid var(--emerald);
   border-radius: 5px;
 
   font-size: inherit;
@@ -60,6 +59,7 @@
   display: flex;
   justify-content: center;
   gap: 25px;
+  margin-top: 10px;
 }
 
 .close {
@@ -69,4 +69,16 @@
 
   border: none;
   background-color: inherit;
+}
+
+.invalid {
+  color: var(--red);
+}
+
+.input {
+  border: 1px solid var(--emerald);
+}
+
+.invalidInput {
+  border: 1px solid var(--red);
 }
