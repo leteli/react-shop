@@ -5,10 +5,14 @@ const useLoginModal = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
+  const changeLoginStatus = () => setIsLoggedIn(!isLoggedIn);
+  const setUser = (user) => setCurrentUser(user);
+
   return {
-    isModalOpen, setIsModalOpen,
-    isLoggedIn, setIsLoggedIn,
-    currentUser, setCurrentUser,
+    isModalOpen, toggleModal,
+    isLoggedIn, changeLoginStatus,
+    currentUser, setUser,
   };
 };
 
