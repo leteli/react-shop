@@ -51,7 +51,7 @@ app.delete('/cart/clear', (req, res) => {
   res.send();
 });
 
-app.post('/auth', (req, res) => {
+app.post('/auth', (req, res) => { // ADD TOKEN!!
   const { login, password } = req.body;
   console.log(login, password);
   const user = state.users.find((u) => u.login === login);
