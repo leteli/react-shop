@@ -40,3 +40,10 @@
   composes: primaryBtn;
   margin-top: auto;
 }
+
+.needLogin {
+  margin-top: auto;
+  border-bottom: 1px solid var(--emerald);
+  padding: 5px;
+  font-size: 14px;
+}
