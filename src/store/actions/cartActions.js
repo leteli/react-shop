@@ -1,21 +1,20 @@
-const cartFetched = (data) => {
+const cartFetched = (payload) => {
   return {
     type: 'cartFetched',
-    payload: data,
-  };
-};
-  
-  
-export const addedToCart = (data, newCountInCart) => {
-  return {
-    type: 'addedToCart',
-    payload: { data, newCountInCart },
+    payload,
   };
 };
 
-export const deletedFromCart = (id) => {
+export const addedToCart = (payload) => {
   return {
-    type: 'deletedFromCart',
+    type: 'addedToCart',
+    payload,
+  };
+};
+
+export const removedFromCart = (id) => {
+  return {
+    type: 'removedFromCart',
     payload: id,
   };
 };

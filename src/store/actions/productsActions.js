@@ -5,24 +5,10 @@ const productsFetched = (data) => {
   };
 };
 
-export const productFetchedById = (data) => {
+export const productUpdated = (payload) => {
   return {
-    type: 'productFetchedById',
-    payload: data,
-  };
-};
-
-export const changedAmount = (data, prevCountInCart, newCountInCart) => {
-  return {
-    type: 'changedAmount',
-    payload: { data, prevCountInCart, newCountInCart },
-  };
-};
-
-export const productEdited = (productData) => {
-  return {
-    type: 'productEdited',
-    payload: productData,
+    type: 'productUpdated',
+    payload,
   };
 };
 
