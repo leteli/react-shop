@@ -1,27 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { deletedFromCart, cartCleared } from '../store/actions/cartActions.js';
+import { middlewareFetchCart, middlewareClearCart, middlewareRemoveProduct } from '../middlewares/cart.js';
+import { deletedFromCart } from '../store/actions/cartActions.js';
 import Layout from './Layout.jsx';
 import { getTotalPrice } from '../utils.js';
 import layout from '../styles/Layout.module.css';
 import styles from '../styles/Cart.module.css';
+import { useEffect } from 'react';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  // const cartProducts = useSelector((state) => state.cart);
-  const handleDelete = (id) => () => dispatch(deletedFromCart(id));
-  const totalPrice = useSelector(getTotalPrice);
-  const handleClear = () => dispatch(cartCleared());
 
-  const cartProducts = [{ id: 6,
-    name: 'Воззвание к жизни: против тирании рынка и государства',
-    price: '470 ₽',
-    quantity: 2,
-    totalPrice: '940 ₽',
-  }];
+  useEffect(() => dispatch(middlewareFetchCart()), [dispatch]);
+  const cartProducts = useSelector((state) => state.cart);
+  const handleDelete = (id) => () => dispatch(middlewareRemoveProduct(id));
+  const totalPrice = useSelector(getTotalPrice);
+  const handleClear = () => dispatch(middlewareClearCart());
 
   return (
     <Layout>
       <h1 className={layout.title}>Корзина</h1>
+      {cartProducts.length === 0 ? <p>Товары не добавлены</p> : (
+      <>
       <table className={styles.cart}>
         <thead>
           <tr>
@@ -40,7 +39,7 @@ const Cart = () => {
           <tr key={id}>
             <td>{id}</td>
             <td>{name}</td>
-            <td className={styles.nowrap}>{price}</td>
+            <td className={styles.nowrap}>{price} ₽</td>
             <td>{quantity}</td>
             <td>{totalPrice}</td>
             <td>
@@ -58,6 +57,7 @@ const Cart = () => {
           <button className={styles.send}disabled={true}>Оплатить</button>
         </div>
       </div>
+    </>)}
     </Layout>
   );
 };
