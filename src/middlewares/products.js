@@ -8,7 +8,9 @@ const middlewareChangedAmount = (id, inputCount) => (dispatch, getState) => {
   const newQuantity = prevCount + inputCount;
   const quantityDiff = newQuantity - prevCount;
   const product = state.products.find((product) => product.id === id);
-  const newProduct = { ...product, inStock: product.inStock - quantityDiff };
+  const diff = product.inStock - quantityDiff;
+  const inStock = diff < 0 ? 0 : diff;
+  const newProduct = { ...product, inStock };
   updateProduct(newProduct)
     .then((data) => dispatch(productUpdated(data)));
 };

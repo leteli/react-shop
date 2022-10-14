@@ -5,8 +5,10 @@ export const middlewareAddToCart = (data, inputCount) => (dispatch, getState) =>
     const { id, name, price } = data;
     const state = getState();
     const cartProduct = state.cart.find((product) => product.id === id);
+    const product = state.products.find((product) => product.id === id);
     const prevCount = cartProduct ? cartProduct.quantity : 0;
-    const newQuantity = prevCount + inputCount;
+    const newQuantity = prevCount + inputCount > product.inStock ? product.inStock : prevCount + inputCount;
+    console.log(newQuantity, product.inStock);
     const newProductInCart = {
       id,
       name,
@@ -31,9 +33,3 @@ export const middlewareRemoveProduct = (id) => (dispatch, getState) => {
 export const middlewareClearCart = () => (dispatch) => {
   clearCart().then(() => dispatch(cartCleared()));
 };
-
-// const handleAdd = (data) => () => {
-    
-//     dispatch(addedToCart(data, inputCount));
-//     dispatch(changedAmount(data, prevCount, inputCount));
-//
