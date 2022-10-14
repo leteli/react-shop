@@ -1,12 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { middlewareAddToCart } from '../middlewares/cart.js';
 import middlewareChangedAmount from '../middlewares/products.js';
-// import { addToCart } from '../api/routes.js';
-// import { addedToCart } from '../store/actions/cartActions.js';
-// import { changedAmount } from '../store/actions/productsActions.js';
-// import styles from '../styles/ItemCard.module.css';
 
-const AddButton = ({ data, setCurrentData, inputCount, style }) => {;
+const AddButton = ({ data, inputCount, style }) => {;
   const { inStock } = data;
   const dispatch = useDispatch();
   const handleAdd = (data) => () => {

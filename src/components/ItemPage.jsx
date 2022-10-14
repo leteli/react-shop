@@ -22,15 +22,11 @@ const ItemPage = () => {
   const currentData = useSelector((state) => state
     .products.find((pr) => pr.id === id));
 
-  const { isLoggedIn, currentUser } = useLoginModalContext();
+  const { currentUser } = useLoginModalContext();
 
-  const prevCount = useSelector((state) => {
-    const cartProduct = state.cart.find((product) => product.id === id);
-    return cartProduct ? cartProduct.quantity : 0;
-  });
+  const [inputCount, setInputCount] = useState(1);
 
-  const [inputCount, setInputCount] = useState(prevCount);
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const value = Number(e.target.value);
     if (value >= 0) {
       setInputCount(value);
@@ -54,7 +50,7 @@ const ItemPage = () => {
             <div className={styles.amount}>
               <input
                 onChange={handleChange}
-                value={inputCount}
+                value={Number(inputCount).toString()}
                 className={styles.counter}
                 type="number"
               />

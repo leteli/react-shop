@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { middlewareFetchCart, middlewareClearCart, middlewareRemoveProduct } from '../middlewares/cart.js';
-import { deletedFromCart } from '../store/actions/cartActions.js';
 import Layout from './Layout.jsx';
 import { getTotalPrice } from '../utils.js';
 import layout from '../styles/Layout.module.css';
