@@ -94,7 +94,7 @@ const getData = () => {
     ],
     cart: [],
     users: [
-      { userId: 1, login: 'user', role: 'user', authToken: 'user', password: 'admin' },
+      { userId: 1, login: 'user', role: 'user', authToken: 'user', password: 'user' },
       { userId: 2, login: 'admin', role: 'admin', authToken: 'admin', password: 'admin' },
     ],
   };

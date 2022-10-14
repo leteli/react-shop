@@ -25,19 +25,17 @@ app.put('/products/:id', (req, res) => {
       productData[key] = updatedData[key];
     }
   }
-  res.send(productData);
+  res.send({ ...productData });
 });
 
 app.put('/cart/add', (req, res) => {
   const productData = req.body;
   const restProducts = state.cart.filter((pr) => pr.id !== productData.id);
   state.cart = [...restProducts, productData];
-  console.log(state.cart);
   res.send(productData);
 });
 
 app.get('/cart/all', (req, res) => {
-  console.log(state.cart);
   res.send(state.cart);
 });
 
@@ -50,12 +48,21 @@ app.delete('/cart/remove', (req, res) => {
 
 app.delete('/cart/clear', (req, res) => {
   state.cart = [];
-  res.send([]);
+  res.send();
 });
 
-app.get('/auth', (req, res) => {
-    res.send();
-})
+app.post('/auth', (req, res) => {
+  const { login, password } = req.body;
+  console.log(login, password);
+  const user = state.users.find((u) => u.login === login);
+  if (!user || user.password !== password) {
+    res.send({ errorStatus: 401 });
+  }
+  if (user) {
+    res.status(200);
+    res.send({ login });
+  }
+});
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
