@@ -20,7 +20,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
-      { isModalOpen && <LoginModal /> }
+      {isModalOpen && <LoginModal /> }
     </BrowserRouter>
   );
 }
