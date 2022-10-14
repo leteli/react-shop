@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import fetchData from '../api/routes.js';
 import productsFetched from '../store/actions/productsActions.js';
 import Layout from './Layout.jsx';
 import ItemCard from './ItemCard.jsx';
@@ -11,12 +12,8 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch('http://127.0.0.1:8080/products');
-      const data = await res.json();
-      dispatch(productsFetched(data));
-    };
-    fetchData();
+    fetchData()
+      .then((data) => dispatch(productsFetched(data)));
   }, [dispatch]);
 
   const products = useSelector((state) => state.products);
