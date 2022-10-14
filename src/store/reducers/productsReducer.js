@@ -6,7 +6,8 @@ const productsReducer = (state = [], action) => {
     case 'productUpdated': {
       const newData = action.payload;
       const restData = state.filter((p) => p.id !== newData.id);
-      return [...restData, newData];
+      const newState = [...restData, newData].sort((p1, p2) => p1.id - p2.id);
+      return newState;
     }
     default:
       return state;
