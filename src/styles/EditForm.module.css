@@ -1,0 +1,60 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: var(--dark-gray);
+}
+
+.info label {
+  margin-top: 20px;
+}
+
+.input {
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  color: var(--dark);
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.validInput {
+  composes: input;
+  border: 1px solid var(--gray);
+}
+
+.invalidInput {
+  composes: input;
+  border: 1px solid var(--red);
+}
+
+.invalid {
+  color: var(--red);
+}
+
+.btnGroup {
+  display: flex;
+  gap: 20px;
+
+  margin-top: 20px;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: inherit;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.cancel {
+  composes: btn;
+  background-color: var(--gray);
+}
+
+.send {
+  composes: btn;
+  background-color: var(--emerald);
+}
