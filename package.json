@@ -8,7 +8,7 @@
       "express": "^4.18.2"
     },
     "scripts": {
-      "serve": "node server/index.js",
+      "serve": "node index.js",
       "dev": "nodemon --exec npm run serve",
       "heroku-postbuild": "cd client && npm install && npm run build"
     },
