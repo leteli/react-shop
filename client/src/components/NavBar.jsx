@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import useLoginModalContext from '../hooks/useLoginModalContext.js';
 import { getTotalAmount } from '../utils.js';
@@ -6,12 +6,14 @@ import { getTotalPrice } from '../utils.js';
 import styles from '../styles/NavBar.module.css';
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const totalAmount = useSelector(getTotalAmount);
   const totalPrice = useSelector(getTotalPrice);
   const { toggleModal, isLoggedIn, changeLoginStatus, currentUser, setUser } = useLoginModalContext();
   const logOut = () => {
     changeLoginStatus();
     setUser(null);
+    navigate('/');
   }
 
   return (
