@@ -1,4 +1,4 @@
-const getData = () => {
+function getData () {
   const state = {
     products: [
       { 
@@ -101,4 +101,4 @@ const getData = () => {
   return state;
 };
 
-export default getData;
+module.exports = { getData };
