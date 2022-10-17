@@ -1,0 +1,61 @@
+
+.cart, .cart td {
+  border-collapse: collapse;
+}
+
+.cart th {
+  padding: 15px 20px;
+  color: var(--dark-gray);
+  text-align: center;
+}
+
+.cart td {
+  padding: 15px 20px;
+  border-top: 1px solid var(--light-gray);
+  border-bottom: 1px solid var(--light-gray);
+  text-align: center;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.total {
+  font-size: 20px;
+}
+
+.primaryBtn {
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  color: var(--white);
+  background-color: var(--emerald);
+  text-transform: uppercase;
+}
+
+.btnGroup {
+  display: flex;
+  gap: 25px;
+}
+
+.delete {
+  padding: 10px;
+  border: 2px solid var(--red);
+  border-radius: 5px;
+  font-weight: 600px;
+  color: var(--red);
+  background-color: inherit;
+  text-transform: uppercase;
+}
+
+.send {
+  composes: primaryBtn;
+  font-size: 18px;
+  background-color: var(--emerald);
+}
+
+.clear {
+  composes: primaryBtn;
+  background-color: var(--gray);
+}

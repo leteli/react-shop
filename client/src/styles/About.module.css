@@ -1,0 +1,11 @@
+.coloredText {
+  font-weight: bold;
+  color: var(--emerald);
+}
+
+.text {
+  margin: 0 30px 30px 30px;
+  max-width: 600px;
+  width: 100%;
+  text-align: left;
+}
