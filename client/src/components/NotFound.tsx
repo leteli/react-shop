@@ -1,7 +1,8 @@
-import Layout from './Layout.jsx';
+import React from 'react';
+import Layout from './Layout';
 import layout from '../styles/Layout.module.css';
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
   return (
     <Layout>
       <h1 className={layout.title}>Что-то пошло не так...</h1>

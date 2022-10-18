@@ -1,8 +1,9 @@
-import Layout from './Layout.jsx';
+import React from 'react';
+import Layout from './Layout';
 import layout from '../styles/Layout.module.css';
 import styles from '../styles/About.module.css';
 
-const About = () => {
+const About: React.FC = () => {
   return (
     <Layout>
       <h1 className={layout.title}>О магазине</h1>
