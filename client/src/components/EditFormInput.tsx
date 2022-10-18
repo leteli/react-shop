@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from '../styles/EditForm.module.css';
 
-import { ValidInputData, InvalidInputData } from '../@types/validation';
+import { ValidInputData, InvalidInputData } from '../types/validation';
 
 
-type Props = {
+interface Props {
   name: string;
   label: string;
   type: string;
   data: ValidInputData | InvalidInputData | null;
-}
+};
 
 const EditFormInput: React.FC<Props> = ({name, label, type, data}) => {
   return (

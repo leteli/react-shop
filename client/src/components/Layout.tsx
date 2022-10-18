@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../styles/Layout.module.css';
 
-type Props = {
+interface Props {
   children: React.ReactNode;
 };
 

@@ -5,10 +5,10 @@ import useLoginModalContext from '../hooks/useLoginModalContext';
 import AddButton from './AddButton';
 import styles from '../styles/ItemCard.module.css';
 
-import type { ProductData } from '../@types/stateData';
+import { IProductData } from '../interfaces/interfaces';
 
-type Props = {
-  data: ProductData;
+interface Props {
+  data: IProductData;
 };
 
 const ItemCard: React.FC<Props> = ({ data }) => {

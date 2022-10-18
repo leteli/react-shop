@@ -2,7 +2,7 @@ import React from 'react';
 import LoginModalContext from '../contexts/loginModalContext';
 import useLoginModalValues from '../hooks/useLoginModalValues';
 
-type Props = {
+interface Props {
   children: React.ReactNode;
 };
 

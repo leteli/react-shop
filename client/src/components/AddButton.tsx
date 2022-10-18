@@ -3,10 +3,10 @@ import { useAppDispatch } from '../hooks/reduxHooks';
 import { middlewareAddToCart } from '../middlewares/cart';
 import middlewareChangedAmount from '../middlewares/products';
 
-import { ProductData } from '../@types/stateData';
+import { IProductData } from '../interfaces/interfaces';
 
-type Props = {
-  data: ProductData;
+interface Props {
+  data: IProductData;
   inputCount: number;
   style: string,
 };
@@ -14,7 +14,7 @@ type Props = {
 const AddButton: React.FC<Props> = ({ data, inputCount, style }) => {;
   const { inStock } = data;
   const dispatch = useAppDispatch();
-  const handleAdd = (data: ProductData) => () => {
+  const handleAdd = (data: IProductData) => () => {
     dispatch(middlewareAddToCart(data, inputCount));
     dispatch(middlewareChangedAmount(data.id, inputCount));
   };

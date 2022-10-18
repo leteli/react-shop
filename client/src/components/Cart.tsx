@@ -6,13 +6,13 @@ import { getTotalPrice } from '../utils';
 import layout from '../styles/Layout.module.css';
 import styles from '../styles/Cart.module.css';
 
-import type { CartProductData } from '../@types/stateData';
+import { ICartProductData } from '../interfaces/interfaces';
 
 const Cart: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => dispatch(middlewareFetchCart()), [dispatch]);
-  const cartProducts = useAppSelector((state): CartProductData[] => state.cart);
+  const cartProducts = useAppSelector((state): ICartProductData[] => state.cart);
   const handleDelete = (id: number) => () => dispatch(middlewareRemoveProduct(id));
   const cart = useAppSelector((state) => state.cart);
   const totalPrice = cart.length === 0 ? 0 : getTotalPrice(cart);

@@ -6,11 +6,11 @@ import EditFormInput from './EditFormInput';
 import styles from '../styles/ItemPage.module.css';
 import formStyles from '../styles/EditForm.module.css';
 
-import { ProductData } from '../@types/stateData';
-import { ValidatedForm } from '../@types/validation';
+import { IProductData } from '../interfaces/interfaces';
+import { ValidatedForm } from '../types/validation';
 
-type Props = {
-  data: ProductData;
+interface Props {
+  data: IProductData;
   toggleEditForm: () => void;
 };
 
