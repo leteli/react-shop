@@ -1,4 +1,6 @@
-const fetchProducts = async () => {
+import { IProductData, ICartProductData } from '../interfaces/interfaces';
+
+const fetchProducts = async (): Promise<IProductData[] | undefined> => {
   try {
     const res = await fetch('/products');
     const data = await res.json();
@@ -8,7 +10,7 @@ const fetchProducts = async () => {
   }
 };
 
-export const fetchProductById = async (id) => {
+export const fetchProductById = async (id: number): Promise<IProductData | undefined> => {
   try {
     const rawRes = await fetch(`/products/${id}`);
     const resData = await rawRes.json();
@@ -18,7 +20,7 @@ export const fetchProductById = async (id) => {
   }
 };
 
-export const updateProduct = async (data) => {
+export const updateProduct = async (data: IProductData): Promise<IProductData | undefined> => {
   try {
     const rawRes = await fetch(`/products/${data.id}`, {
       method: 'PUT',
@@ -35,7 +37,7 @@ export const updateProduct = async (data) => {
   }
 };
 
-export const fetchCart = async () => {
+export const fetchCart = async (): Promise<ICartProductData[] | undefined> => {
   try {
     const rawRes = await fetch('/cart/all');
     const resData = await rawRes.json();
@@ -45,7 +47,7 @@ export const fetchCart = async () => {
   }
 };
 
-export const addToCart = async (data) => {
+export const addToCart = async (data: ICartProductData): Promise<ICartProductData | undefined> => {
   try {
   const rawRes = await fetch('/cart/add', {
     method: 'PUT',
@@ -62,7 +64,7 @@ export const addToCart = async (data) => {
   }
 };
 
-export const removeFromCart = async (id) => {
+export const removeFromCart = async (id: number): Promise<ICartProductData | undefined> => {
   try {
     const rawRes = await fetch('/cart/remove', {
       method: 'DELETE',
@@ -79,7 +81,7 @@ export const removeFromCart = async (id) => {
   }
 };
 
-export const clearCart = async () => {
+export const clearCart = async (): Promise<void> => {
   try {
     await fetch('cart/clear', {
       method: 'DELETE',
@@ -89,13 +91,26 @@ export const clearCart = async () => {
   }
 };
 
-export const checkAuth = async (loginData) => {
+interface LoginData {
+  login: string;
+}
+
+interface UserData extends LoginData {
+  password: string;
+};
+
+interface LoginResponse {
+  login?: string;
+  errorStatus?: number;
+}
+
+export const checkAuth = async (userData: UserData): Promise<LoginResponse> => {
   const rawResponse = await fetch('/auth', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(loginData),
+    body: JSON.stringify(userData),
   });
   const response = await rawResponse.json();
   return response;
