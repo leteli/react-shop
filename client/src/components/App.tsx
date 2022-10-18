@@ -1,14 +1,15 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import NavBar from './NavBar.jsx';
-import Home from './Home.jsx';
-import ItemPage from './ItemPage.jsx';
-import Cart from './Cart.jsx';
-import About from './About.jsx';
-import NotFound from './NotFound.jsx';
-import LoginModal from './LoginModal.jsx';
-import useLoginModalContext from '../hooks/useLoginModalContext.js';
+import NavBar from './NavBar';
+import Home from './Home';
+import ItemPage from './ItemPage';
+import Cart from './Cart';
+import About from './About';
+import NotFound from './NotFound';
+import LoginModal from './LoginModal';
+import useLoginModalContext from '../hooks/useLoginModalContext';
 
-const App = () => {
+const App: React.FC = () => {
   const { isModalOpen } = useLoginModalContext();
   return (
     <BrowserRouter>

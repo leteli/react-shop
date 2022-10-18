@@ -1,6 +1,17 @@
+import React from 'react';
 import styles from '../styles/EditForm.module.css';
 
-const EditFormInput = ({name, label, type, data}) => {
+import { ValidInputData, InvalidInputData } from '../@types/validation';
+
+
+type Props = {
+  name: string;
+  label: string;
+  type: string;
+  data: ValidInputData | InvalidInputData | null;
+}
+
+const EditFormInput: React.FC<Props> = ({name, label, type, data}) => {
   return (
     <>
     <label htmlFor={name}>{label}</label>
