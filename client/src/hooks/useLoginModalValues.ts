@@ -1,13 +1,14 @@
 import { useState } from 'react';
+import IContext from '../interfaces/interfaces'
 
-const useLoginModal = () => {
+const useLoginModal = (): IContext => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState<string | null>(null);
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
   const changeLoginStatus = () => setIsLoggedIn(!isLoggedIn);
-  const setUser = (user) => setCurrentUser(user);
+  const setUser = (user: string | null) => setCurrentUser(user);
 
   return {
     isModalOpen, toggleModal,
