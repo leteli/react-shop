@@ -1,6 +1,7 @@
 import React, { useState, useRef, SyntheticEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLoginModalContext from '../hooks/useLoginModalContext';
+import FormInput from '../components/FormInput';
 import { checkAuth } from '../api/routes';
 import cartStyles from '../styles/Cart.module.css';
 import styles from '../styles/LoginModal.module.css';
@@ -46,23 +47,20 @@ const LoginModal: React.FC = () => {
           <h1 className={styles.title}>Авторизация</h1>
         </header>
         <form onSubmit={handleAuth} ref={formRef} className={styles.loginForm} action="#">
-          <label htmlFor="login">Логин</label>
-          <input
-            className={authFailed ? styles.invalidInput : styles.input}
-            id="login"
+          <FormInput
             name="login"
+            label="Логин"
             type="text"
             placeholder="Введите логин"
+            error={authFailed ? 'isNotDisplayed' : ''}
           />
-          <label htmlFor="password">Пароль</label>
-          <input
-            className={authFailed ? styles.invalidInput : styles.input}
-            id="password"
+          <FormInput
             name="password"
+            label="Пароль"
             type="password"
             placeholder="Введите пароль"
+            error={authFailed ? 'Неверный логин или пароль' : ''}
           />
-          {authFailed && <div className={styles.invalid}>Неверный логин или пароль</div>}
           <div className={styles.btnGroup}>
             <button onClick={toggleModal} className={cartStyles.clear}>Отмена</button>
             <button type="submit" className={cartStyles.send}>Войти</button>

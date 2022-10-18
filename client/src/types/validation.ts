@@ -1,11 +1,12 @@
 export type InvalidInputData = {
   isValid: false;
-  message: string;
+  error: string;
 };
 
 export type ValidInputData = {
   isValid: true;
   value: string;
+  error: '';
 };
 
 export type ValidatedForm = {

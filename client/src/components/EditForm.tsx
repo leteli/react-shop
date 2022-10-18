@@ -2,9 +2,10 @@ import React, { useState, useRef, SyntheticEvent } from 'react';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import validate, { getUpdatedData } from '../utils';
 import { middlewareUpdatedProduct } from '../middlewares/products';
-import EditFormInput from './EditFormInput';
+import FormInput from './FormInput';
 import styles from '../styles/ItemPage.module.css';
-import formStyles from '../styles/EditForm.module.css';
+import form from '../styles/EditForm.module.css';
+import input from '../styles/FormInput.module.css';
 
 import { IProductData } from '../interfaces/interfaces';
 import { ValidatedForm } from '../types/validation';
@@ -38,14 +39,38 @@ const EditForm: React.FC<Props> = ({ data, toggleEditForm }) => {
     <form onSubmit={handleForm} ref={formRef} className={styles.main}>
     <div className={styles.top}>
       <img className={styles.image} src={data.picture} alt="Обложка книги" />
-      <div className={formStyles.info}>
-        <EditFormInput name="name" type="text" label="Название" data={valResult && valResult.name}/>
-        <EditFormInput name="author" type="text" label="Автор" data={valResult && valResult.author}/>
-        <EditFormInput name="price" type="number" label="Цена" data={valResult && valResult.price}/>
-        <EditFormInput name="inStock" type="number" label="В наличии" data={valResult && valResult.inStock}/>
-        <div className={formStyles.btnGroup}>
-          <button className={formStyles.cancel} onClick={toggleEditForm}>Отмена</button>
-          <button className={formStyles.send} type="submit">Сохранить</button>
+      <div className={form.info}>
+        <FormInput
+          name="name"
+          type="text"
+          label="Название"
+          placeholder="Введите название книги"
+          error={valResult && valResult.name.error}
+        />
+        <FormInput
+          name="author"
+          type="text"
+          label="Автор"
+          placeholder="Введите автора книги"
+          error={valResult && valResult.author.error}
+        />
+        <FormInput
+          name="price"
+          type="number"
+          label="Цена"
+          placeholder="Введите цену"
+          error={valResult && valResult.price.error}
+        />
+        <FormInput
+          name="inStock"
+          type="number"
+          label="В наличии"
+          placeholder="Введите количество товара"
+          error={valResult && valResult.inStock.error}
+        />
+        <div className={form.btnGroup}>
+          <button className={form.cancel} onClick={toggleEditForm}>Отмена</button>
+          <button className={form.send} type="submit">Сохранить</button>
         </div>
       </div>
     </div>
@@ -53,9 +78,11 @@ const EditForm: React.FC<Props> = ({ data, toggleEditForm }) => {
     <textarea
       id="description"
       name="description"
-      className={valResult && !valResult.description.isValid ? formStyles.invalidInput : formStyles.validInput}
+      className={valResult && !valResult.description.isValid ? input.invalidInput : input.validInput}
     ></textarea>
-    {valResult && !valResult.description.isValid && <div className={formStyles.invalid}>{valResult.description.message}</div>}
+    {valResult && valResult.description.error !== '' && (
+      <div className={input.error}>{valResult.description.error}</div>
+    )}
   </form>
   );
 };

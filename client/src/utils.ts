@@ -16,15 +16,15 @@ const validate = (formData: FormData): ValidatedForm => {
     if (typeof rawValue === 'string') {
       value = rawValue.trim();
       if (value === '') {
-        validatedData[name] = { isValid: false, message: 'Поле не должно быть пустым' };
+        validatedData[name] = { isValid: false, error: 'Поле не должно быть пустым' };
       } else if (name === 'description'  && value.length > 1000) {
-        validatedData[name] = { isValid: false, message: 'Не более 600 символов' };
+        validatedData[name] = { isValid: false, error: 'Не более 600 символов' };
       } else if (name === 'description') {
-        validatedData[name] = { isValid: true, value };
+        validatedData[name] = { isValid: true, value, error: '' };
       } else if (value.length > 60) {
-        validatedData[name] = { isValid: false, message: 'Не более 30 символов' };
+        validatedData[name] = { isValid: false, error: 'Не более 30 символов' };
       } else {
-        validatedData[name] = { isValid: true, value };
+        validatedData[name] = { isValid: true, value,  error: '' };
       }
     }
   }
