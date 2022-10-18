@@ -1,18 +1,21 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { middlewareFetchCart, middlewareClearCart, middlewareRemoveProduct } from '../middlewares/cart.js';
-import Layout from './Layout.jsx';
-import { getTotalPrice } from '../utils.js';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { middlewareFetchCart, middlewareClearCart, middlewareRemoveProduct } from '../middlewares/cart';
+import Layout from './Layout';
+import { getTotalPrice } from '../utils';
 import layout from '../styles/Layout.module.css';
 import styles from '../styles/Cart.module.css';
-import { useEffect } from 'react';
 
-const Cart = () => {
-  const dispatch = useDispatch();
+import type { CartProductData } from '../@types/stateData';
+
+const Cart: React.FC = () => {
+  const dispatch = useAppDispatch();
 
   useEffect(() => dispatch(middlewareFetchCart()), [dispatch]);
-  const cartProducts = useSelector((state) => state.cart);
-  const handleDelete = (id) => () => dispatch(middlewareRemoveProduct(id));
-  const totalPrice = useSelector(getTotalPrice);
+  const cartProducts = useAppSelector((state): CartProductData[] => state.cart);
+  const handleDelete = (id: number) => () => dispatch(middlewareRemoveProduct(id));
+  const cart = useAppSelector((state) => state.cart);
+  const totalPrice = cart.length === 0 ? 0 : getTotalPrice(cart);
   const handleClear = () => dispatch(middlewareClearCart());
 
   return (

@@ -1,17 +1,29 @@
-import { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import validate, { getUpdatedData } from '../utils.js';
-import { middlewareUpdatedProduct } from '../middlewares/products.js';
-import EditFormInput from './EditFormInput.jsx';
+import React, { useState, useRef, SyntheticEvent } from 'react';
+import { useAppDispatch } from '../hooks/reduxHooks';
+import validate, { getUpdatedData } from '../utils';
+import { middlewareUpdatedProduct } from '../middlewares/products';
+import EditFormInput from './EditFormInput';
 import styles from '../styles/ItemPage.module.css';
 import formStyles from '../styles/EditForm.module.css';
 
-const EditForm = ({ data, toggleEditForm }) => {
-  const formRef = useRef();
-  const dispatch = useDispatch();
-  const [valResult, setValResult] = useState(null);
-  const handleForm = (e) => {
+import { ProductData } from '../@types/stateData';
+import { ValidatedForm } from '../@types/validation';
+
+type Props = {
+  data: ProductData;
+  toggleEditForm: () => void;
+};
+
+const EditForm: React.FC<Props> = ({ data, toggleEditForm }) => {
+  const formRef = useRef<HTMLFormElement>(null);
+  const dispatch = useAppDispatch();
+  const [valResult, setValResult] = useState<ValidatedForm | null>(null);
+
+  const handleForm = (e: SyntheticEvent) => {
     e.preventDefault();
+    if (!formRef.current) {
+      throw new Error('DOM элемент не найден!');
+    }
     const values = new FormData(formRef.current);
     const validatedData = validate(values);
     setValResult(validatedData);
@@ -41,7 +53,6 @@ const EditForm = ({ data, toggleEditForm }) => {
     <textarea
       id="description"
       name="description"
-      type="text"
       className={valResult && !valResult.description.isValid ? formStyles.invalidInput : formStyles.validInput}
     ></textarea>
     {valResult && !valResult.description.isValid && <div className={formStyles.invalid}>{valResult.description.message}</div>}

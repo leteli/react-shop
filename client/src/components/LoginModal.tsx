@@ -1,22 +1,26 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef, SyntheticEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useLoginModalContext from '../hooks/useLoginModalContext.js';
-import { checkAuth } from '../api/routes.js';
+import useLoginModalContext from '../hooks/useLoginModalContext';
+import { checkAuth } from '../api/routes';
 import cartStyles from '../styles/Cart.module.css';
 import styles from '../styles/LoginModal.module.css';
 
-const LoginModal = () => {
-  const [authFailed, setAuthFailed] = useState(null);
-  const formRef = useRef();
+const LoginModal: React.FC = () => {
+  const [authFailed, setAuthFailed] = useState<boolean | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const { toggleModal, changeLoginStatus, setUser } = useLoginModalContext();
   const navigate = useNavigate();
 
-  const handleAuth = async (e) => {
+  const handleAuth = async (e: SyntheticEvent) => {
     e.preventDefault();
+    if (!formRef.current) {
+      throw new Error('DOM элемент не найден!');
+    }
     const values = new FormData(formRef.current);
+
     const loginData = {
-      login: values.get('login'),
-      password: values.get('password'),
+      login: values.get('login') as string,
+      password: values.get('password') as string,
     }
     const response = await checkAuth(loginData);
     if (response.errorStatus === 401) {

@@ -1,14 +1,16 @@
+import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import useLoginModalContext from '../hooks/useLoginModalContext.js';
-import { getTotalAmount } from '../utils.js';
-import { getTotalPrice } from '../utils.js';
+import { useAppSelector } from '../hooks/reduxHooks';
+import useLoginModalContext from '../hooks/useLoginModalContext';
+import { getTotalAmount } from '../utils';
+import { getTotalPrice } from '../utils';
 import styles from '../styles/NavBar.module.css';
 
-const NavBar = () => {
+const NavBar: React.FC = () => {
   const navigate = useNavigate();
-  const totalAmount = useSelector(getTotalAmount);
-  const totalPrice = useSelector(getTotalPrice);
+  const cart = useAppSelector((state) => state.cart);
+  const totalAmount = cart.length === 0 ? 0 : getTotalAmount(cart);
+  const totalPrice = cart.length === 0 ? 0 : getTotalPrice(cart);
   const { toggleModal, isLoggedIn, changeLoginStatus, currentUser, setUser } = useLoginModalContext();
   const logOut = () => {
     changeLoginStatus();

@@ -1,13 +1,20 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import useLoginModalContext from '../hooks/useLoginModalContext.js';
-import AddButton from './AddButton.jsx';
+import { useAppSelector } from '../hooks/reduxHooks';
+import useLoginModalContext from '../hooks/useLoginModalContext';
+import AddButton from './AddButton';
 import styles from '../styles/ItemCard.module.css';
 
-const ItemCard = ({ data }) => {
+import type { ProductData } from '../@types/stateData';
+
+type Props = {
+  data: ProductData;
+};
+
+const ItemCard: React.FC<Props> = ({ data }) => {
   const { id, name, author, picture, price, inStock } = data;
   const { isLoggedIn, currentUser } = useLoginModalContext();
-  const prevCount = useSelector((state) => {
+  const prevCount = useAppSelector((state) => {
     const cartProduct = state.cart.find((product) => product.id === id);
     return cartProduct ? cartProduct.quantity : 0;
   });
@@ -20,7 +27,6 @@ const ItemCard = ({ data }) => {
       { currentUser === 'user' ? (
       <AddButton
         inputCount={1}
-        prevCount={prevCount}
         data={data}
         style={inStock !== 0 ? styles.addBtn : styles.disabledBtn} />
       ) : isLoggedIn ? null : <div className={styles.needLogin}>Войдите, чтобы добавить в корзину</div>}

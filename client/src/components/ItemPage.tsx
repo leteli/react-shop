@@ -1,33 +1,38 @@
+import React, { useState, useEffect, SyntheticEvent } from 'react';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import productsFetched from '../store/actions/productsActions.js';
-import fetchProducts, { fetchProductById } from '../api/routes.js';
-import useLoginModalContext from '../hooks/useLoginModalContext.js';
-import Layout from './Layout.jsx';
-import AddButton from './AddButton.jsx';
-import EditForm from './EditForm.jsx';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import productsFetched from '../store/actions/productsActions';
+import fetchProducts from '../api/routes';
+import useLoginModalContext from '../hooks/useLoginModalContext';
+import Layout from './Layout';
+import AddButton from './AddButton';
+import EditForm from './EditForm';
 import styles from '../styles/ItemPage.module.css';
 import cardStyles from '../styles/ItemCard.module.css';
 
-const ItemPage = () => {
+const ItemPage: React.FC = () => {
   const params = useParams();
   const id = Number(params.id);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   useEffect(() => {
     fetchProducts()
-      .then((data) => dispatch(productsFetched(data)));
+      .then((data) => {
+        if (data !== undefined) {
+          dispatch(productsFetched(data));
+        }
+      })
+      .catch((err) => console.log(err));
     }, [dispatch]);
 
-  const currentData = useSelector((state) => state
+  const currentData = useAppSelector((state) => state
     .products.find((pr) => pr.id === id));
 
   const { currentUser } = useLoginModalContext();
 
   const [inputCount, setInputCount] = useState(1);
 
-  const handleChange = async (e) => {
-    const value = Number(e.target.value);
+  const handleChange = async (e: SyntheticEvent) => {
+    const value = Number((e.target as HTMLInputElement).value);
     if (value >= 0) {
       setInputCount(value);
     }
