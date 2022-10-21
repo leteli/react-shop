@@ -59,3 +59,11 @@
   composes: primaryBtn;
   background-color: var(--gray);
 }
+
+
+@media(max-width: 680px) {
+  .cart th,
+  .cart td {
+    padding: 15px 10px;
+  }
+}
