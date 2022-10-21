@@ -59,7 +59,7 @@ app.post('/auth', (req, res) => { // ADD TOKEN!!
   console.log(login, password);
   const user = state.users.find((u) => u.login === login);
   if (!user || user.password !== password) {
-    res.send({ errorStatus: 401 }); // mb throw error?
+    res.status(401).send({ errorStatus: 401 }); // mb throw error?
   }
   if (user) {
     res.status(200);

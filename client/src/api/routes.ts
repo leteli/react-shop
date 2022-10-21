@@ -111,10 +111,11 @@ interface UserData extends LoginData {
 
 interface LoginResponse {
   login?: string;
-  errorStatus?: number;
+  status?: number;
 }
 
-export const checkAuth = async (userData: UserData): Promise<LoginResponse> => {
+export const checkAuth = async (userData: UserData): Promise<LoginResponse | null> => {
+  try {
     const rawResponse = await fetch(`${API_URL}/auth`, {
       method: 'POST',
       headers: {
@@ -122,8 +123,15 @@ export const checkAuth = async (userData: UserData): Promise<LoginResponse> => {
       },
       body: JSON.stringify(userData),
     });
+    if (rawResponse.status === 401) {
+      return rawResponse;
+    }
     const response = await rawResponse.json();
     return response;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
 };
 
 export default fetchProducts;

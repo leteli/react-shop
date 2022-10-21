@@ -24,11 +24,11 @@ const LoginModal: React.FC = () => {
       password: values.get("password") as string,
     };
     const response = await checkAuth(loginData);
-    if (response.errorStatus === 401) {
+    if (response && response.status === 401) {
       setAuthFailed(true);
       return;
     }
-    if (response.login) {
+    if (response && response.login) {
       setAuthFailed(false);
       changeLoginStatus();
       setUser(response.login);

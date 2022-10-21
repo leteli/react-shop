@@ -12,10 +12,6 @@ import fetchProducts, {
 
 import state, { cartProduct } from '../stateFixture';
 
-global.fetch = jest.fn(() => Promise.resolve({
-  json: () => Promise.resolve(''),
-})) as jest.Mock;
-
 export const setGlobalFetch = (mockData: any) => {
   global.fetch = jest.fn(() => Promise.resolve({
     json: () => Promise.resolve(mockData),
@@ -82,8 +78,8 @@ describe('test api', () => {
 
     test('incorrect data', async () => {
       const incorrectData = { login: 'aa', password: 'jj'};
-      setGlobalFetch({ errorStatus: 401 }); // mb throw error on server?
-      expect(await checkAuth(incorrectData)).toEqual({ errorStatus: 401});
+      setGlobalFetch({ status: 401 }); // mb throw error on server?
+      expect(await checkAuth(incorrectData)).toEqual({ status: 401});
     });
   });
 });

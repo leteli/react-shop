@@ -48,7 +48,7 @@ describe("testing app login", () => {
       expect(passwordInput).toBeInTheDocument();
       userEvent.type(usernameInput, "login");
       userEvent.type(passwordInput, "password");
-      setGlobalFetch({ errorStatus: 401 });
+      setGlobalFetch({ status: 401 });
       fireEvent.submit(loginForm);
       await waitFor(() => {
         expect(screen.getByText(/Неверный логин или пароль/i)).toBeInTheDocument();
