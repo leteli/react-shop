@@ -3,7 +3,7 @@ import API_URL from './constants';
 
 const fetchProducts = async (): Promise<IProductData[] | null> => {
   try {
-    const res = await fetch(`${API_URL}/products`);
+    const res = await fetch('/products');
     const data = await res.json();
     return data;
   } catch(err) {
