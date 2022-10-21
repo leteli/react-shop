@@ -1,5 +1,4 @@
 import { IProductData, ICartProductData } from '../interfaces/interfaces';
-import API_URL from './constants';
 
 const fetchProducts = async (): Promise<IProductData[] | null> => {
   try {
@@ -14,7 +13,7 @@ const fetchProducts = async (): Promise<IProductData[] | null> => {
 
 export const fetchProductById = async (id: number): Promise<IProductData | null> => {
   try {
-    const rawRes = await fetch(`${API_URL}/products/${id}`);
+    const rawRes = await fetch(`/products/${id}`);
     const resData = await rawRes.json();
     return resData;
   } catch (err) {
@@ -25,7 +24,7 @@ export const fetchProductById = async (id: number): Promise<IProductData | null>
 
 export const updateProduct = async (data: IProductData): Promise<IProductData | null> => {
   try {
-    const rawRes = await fetch(`${API_URL}/products/${data.id}`, {
+    const rawRes = await fetch(`/products/${data.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -43,7 +42,7 @@ export const updateProduct = async (data: IProductData): Promise<IProductData | 
 
 export const fetchCart = async (): Promise<ICartProductData[] | null> => {
   try {
-    const rawRes = await fetch(`${API_URL}/cart/all`);
+    const rawRes = await fetch('/cart/all');
     const resData = await rawRes.json();
     return resData;
   } catch (err) {
@@ -54,7 +53,7 @@ export const fetchCart = async (): Promise<ICartProductData[] | null> => {
 
 export const addToCart = async (data: ICartProductData): Promise<ICartProductData | null> => {
   try {
-  const rawRes = await fetch(`${API_URL}/cart/add`, {
+  const rawRes = await fetch('/cart/add', {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
@@ -72,7 +71,7 @@ export const addToCart = async (data: ICartProductData): Promise<ICartProductDat
 
 export const removeFromCart = async (id: number): Promise<ICartProductData | null> => {
   try {
-    const rawRes = await fetch(`${API_URL}/cart/remove`, {
+    const rawRes = await fetch('/cart/remove', {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -90,7 +89,7 @@ export const removeFromCart = async (id: number): Promise<ICartProductData | nul
 
 export const clearCart = async (): Promise<[] | null> => {
   try {
-  const res = await fetch(`${API_URL}cart/clear`, {
+  const res = await fetch('cart/clear', {
       method: 'DELETE',
     });
     const resData = await res.json();
@@ -116,7 +115,7 @@ interface LoginResponse {
 
 export const checkAuth = async (userData: UserData): Promise<LoginResponse | null> => {
   try {
-    const rawResponse = await fetch(`${API_URL}/auth`, {
+    const rawResponse = await fetch('/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
