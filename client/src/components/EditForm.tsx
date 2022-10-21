@@ -33,6 +33,7 @@ const EditForm: React.FC<Props> = ({ data, toggleEditForm }) => {
       const updatedData = getUpdatedData(validatedData as ValidForm);
       const newProductData = { ...data, ...updatedData }
       dispatch(middlewareUpdatedProduct(newProductData));
+      toggleEditForm();
     }
   };
 
