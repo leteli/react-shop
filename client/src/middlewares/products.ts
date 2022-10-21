@@ -10,17 +10,13 @@ const middlewareChangedAmount =
   (id: number, inputCount: number): ThunkAction<void, RootState, unknown, AnyAction> =>
   (dispatch, getState) => {
     const state: RootState = getState();
-    const cartProduct = state.cart.find((product) => product.id === id);
-    const prevCount = cartProduct ? cartProduct.quantity : 0;
-    const newQuantity = prevCount + inputCount;
-    const quantityDiff = newQuantity - prevCount;
     const product = state.products.find((product) => product.id === id) as IProductData;
-    const diff = product.inStock - quantityDiff;
+    const diff = product.inStock - inputCount;
     const inStock = diff < 0 ? 0 : diff;
     const newProduct: IProductData = { ...product, inStock };
     updateProduct(newProduct)
       .then((data) => {
-        if (data !== undefined) {
+        if (data !== null) {
           dispatch(productUpdated(data));
         }
       })
@@ -32,7 +28,7 @@ export const middlewareUpdatedProduct =
   (dispatch: Dispatch<AnyAction>) => {
     updateProduct(data)
       .then((data) => {
-        if (data !== undefined) {
+        if (data !== null) {
           dispatch(productUpdated(data));
         }
       })
