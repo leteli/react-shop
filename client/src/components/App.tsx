@@ -12,17 +12,17 @@ import useLoginModalContext from '../hooks/useLoginModalContext';
 const App: React.FC = () => {
   const { isModalOpen } = useLoginModalContext();
   return (
-    <BrowserRouter>
+    <>
       <NavBar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />}/>
         <Route path="/products/:id" element={<ItemPage />} />
-        <Route path="cart" element={<Cart />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/about" element={<About />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
       {isModalOpen && <LoginModal /> }
-    </BrowserRouter>
+    </>
   );
 }
 
