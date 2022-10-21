@@ -51,7 +51,7 @@ app.delete('/cart/remove', (req, res) => {
 
 app.delete('/cart/clear', (req, res) => {
   state.cart = [];
-  res.send();
+  res.send(state.cart);
 });
 
 app.post('/auth', (req, res) => { // ADD TOKEN!!
@@ -59,7 +59,7 @@ app.post('/auth', (req, res) => { // ADD TOKEN!!
   console.log(login, password);
   const user = state.users.find((u) => u.login === login);
   if (!user || user.password !== password) {
-    res.send({ errorStatus: 401 });
+    res.send({ errorStatus: 401 }); // mb throw error?
   }
   if (user) {
     res.status(200);
