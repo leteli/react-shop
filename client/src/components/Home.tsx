@@ -14,7 +14,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     fetchData()
       .then((data) => {
-        if (data !== undefined) {
+        if (data !== null) {
           dispatch(productsFetched(data));
         }
       })
