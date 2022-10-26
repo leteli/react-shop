@@ -38,28 +38,14 @@
 .loginForm {
   display: flex;
   flex-direction: column;
-  gap: 15px;
   width: 100%;
-}
-
-.loginForm label {
-  color: var(--dark-gray);
-}
-
-.loginForm input {
-  width: 100%;
-  padding: 1rem;
-  border-radius: 5px;
-
-  font-size: inherit;
-  color: inherit;
 }
 
 .btnGroup {
   display: flex;
   justify-content: center;
   gap: 25px;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .close {
@@ -69,16 +55,4 @@
 
   border: none;
   background-color: inherit;
-}
-
-.invalid {
-  color: var(--red);
-}
-
-.input {
-  border: 1px solid var(--emerald);
-}
-
-.invalidInput {
-  border: 1px solid var(--red);
 }
