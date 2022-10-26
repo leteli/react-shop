@@ -14,14 +14,14 @@ interface Props {
 const ItemCard: React.FC<Props> = ({ data }) => {
   const { id, name, author, picture, price, inStock } = data;
   const { isLoggedIn, currentUser } = useLoginModalContext();
-  const prevCount = useAppSelector((state) => {
-    const cartProduct = state.cart.find((product) => product.id === id);
-    return cartProduct ? cartProduct.quantity : 0;
-  });
+  // const prevCount = useAppSelector((state) => {
+  //   const cartProduct = state.cart.find((product) => product.id === id);
+  //   return cartProduct ? cartProduct.quantity : 0;
+  // });
   return (
-    <div key={id} className={styles.card}>
+    <div key={id} className={styles.card} data-testid="item-card">
       <img className={styles.image} src={picture} alt="Обложка книги" />
-      <Link to={`/products/${id}`}><h2 className={styles.title}>{name}</h2></Link>
+      <Link to={`/products/${id}`} data-testid={`item-link-${id}`}><h2 className={styles.title}>{name}</h2></Link>
       <span>{author}</span>
       <span className={styles.price}>{price} ₽</span>
       { currentUser === 'user' ? (

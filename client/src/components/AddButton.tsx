@@ -12,7 +12,6 @@ interface Props {
 };
 
 const AddButton: React.FC<Props> = ({ data, inputCount, style }) => {;
-  const { inStock } = data;
   const dispatch = useAppDispatch();
   const handleAdd = (data: IProductData) => () => {
     dispatch(middlewareAddToCart(data, inputCount));
@@ -21,11 +20,12 @@ const AddButton: React.FC<Props> = ({ data, inputCount, style }) => {;
 
   return (
     <button
+      data-testid={`item-add-btn-${data.id}`}
       onClick={handleAdd(data)}
       className={style}
-      disabled={inStock === 0}
+      disabled={data.inStock === 0}
       >
-      {inStock > 0 ? 'В корзину' : 'Нет в наличии'}
+      {data.inStock > 0 ? 'В корзину' : 'Нет в наличии'}
     </button>
   );
 };

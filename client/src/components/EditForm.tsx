@@ -8,7 +8,7 @@ import form from '../styles/EditForm.module.css';
 import input from '../styles/FormInput.module.css';
 
 import { IProductData } from '../interfaces/interfaces';
-import { ValidatedForm } from '../types/validation';
+import { ValidatedForm, ValidForm } from '../types/validation';
 
 interface Props {
   data: IProductData;
@@ -25,18 +25,20 @@ const EditForm: React.FC<Props> = ({ data, toggleEditForm }) => {
     if (!formRef.current) {
       throw new Error('DOM элемент не найден!');
     }
-    const values = new FormData(formRef.current);
-    const validatedData = validate(values);
+    const formData = new FormData(formRef.current);
+    const entries = Array.from(formData.entries());
+    const validatedData = validate(entries as Array<[string, string]>);
     setValResult(validatedData);
     if (Object.values(validatedData).every((val) => val.isValid)) {
-      const updatedData = getUpdatedData(validatedData);
+      const updatedData = getUpdatedData(validatedData as ValidForm);
       const newProductData = { ...data, ...updatedData }
       dispatch(middlewareUpdatedProduct(newProductData));
+      toggleEditForm();
     }
   };
 
   return (
-    <form onSubmit={handleForm} ref={formRef} className={styles.main}>
+    <form onSubmit={handleForm} ref={formRef} className={styles.main} data-testid={`edit-form-${data.id}`}>
     <div className={styles.top}>
       <img className={styles.image} src={data.picture} alt="Обложка книги" />
       <div className={form.info}>
@@ -69,8 +71,8 @@ const EditForm: React.FC<Props> = ({ data, toggleEditForm }) => {
           error={valResult && valResult.inStock.error}
         />
         <div className={form.btnGroup}>
-          <button className={form.cancel} onClick={toggleEditForm}>Отмена</button>
-          <button className={form.send} type="submit">Сохранить</button>
+          <button className={form.cancel} onClick={toggleEditForm} data-testid="cancel-edit-btn">Отмена</button>
+          <button className={form.send} type="submit" data-testid="save-edit-btn">Сохранить</button>
         </div>
       </div>
     </div>

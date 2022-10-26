@@ -1,26 +1,28 @@
 import { IProductData, ICartProductData } from '../interfaces/interfaces';
 
-const fetchProducts = async (): Promise<IProductData[] | undefined> => {
+const fetchProducts = async (): Promise<IProductData[] | null> => {
   try {
     const res = await fetch('/products');
     const data = await res.json();
     return data;
   } catch(err) {
     console.log(err);
+    return null;
   }
 };
 
-export const fetchProductById = async (id: number): Promise<IProductData | undefined> => {
+export const fetchProductById = async (id: number): Promise<IProductData | null> => {
   try {
     const rawRes = await fetch(`/products/${id}`);
     const resData = await rawRes.json();
     return resData;
   } catch (err) {
     console.log(err);
+    return null;
   }
 };
 
-export const updateProduct = async (data: IProductData): Promise<IProductData | undefined> => {
+export const updateProduct = async (data: IProductData): Promise<IProductData | null> => {
   try {
     const rawRes = await fetch(`/products/${data.id}`, {
       method: 'PUT',
@@ -34,20 +36,22 @@ export const updateProduct = async (data: IProductData): Promise<IProductData | 
     return resData;
   } catch (err) {
     console.log(err);
+    return null;
   }
 };
 
-export const fetchCart = async (): Promise<ICartProductData[] | undefined> => {
+export const fetchCart = async (): Promise<ICartProductData[] | null> => {
   try {
     const rawRes = await fetch('/cart/all');
     const resData = await rawRes.json();
     return resData;
   } catch (err) {
     console.log(err);
+    return null;
   }
 };
 
-export const addToCart = async (data: ICartProductData): Promise<ICartProductData | undefined> => {
+export const addToCart = async (data: ICartProductData): Promise<ICartProductData | null> => {
   try {
   const rawRes = await fetch('/cart/add', {
     method: 'PUT',
@@ -61,10 +65,11 @@ export const addToCart = async (data: ICartProductData): Promise<ICartProductDat
   return resData;
   } catch (err) {
     console.log(err);
+    return null;
   }
 };
 
-export const removeFromCart = async (id: number): Promise<ICartProductData | undefined> => {
+export const removeFromCart = async (id: number): Promise<ICartProductData | null> => {
   try {
     const rawRes = await fetch('/cart/remove', {
       method: 'DELETE',
@@ -78,16 +83,20 @@ export const removeFromCart = async (id: number): Promise<ICartProductData | und
     return resData;
   } catch (err) {
     console.log(err);
+    return null;
   }
 };
 
-export const clearCart = async (): Promise<void> => {
+export const clearCart = async (): Promise<[] | null> => {
   try {
-    await fetch('cart/clear', {
+  const res = await fetch('cart/clear', {
       method: 'DELETE',
     });
-  } catch (err) {
+    const resData = await res.json();
+    return resData;
+  } catch(err) {
     console.log(err);
+    return null;
   }
 };
 
@@ -101,19 +110,27 @@ interface UserData extends LoginData {
 
 interface LoginResponse {
   login?: string;
-  errorStatus?: number;
+  status?: number;
 }
 
-export const checkAuth = async (userData: UserData): Promise<LoginResponse> => {
-  const rawResponse = await fetch('/auth', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(userData),
-  });
-  const response = await rawResponse.json();
-  return response;
+export const checkAuth = async (userData: UserData): Promise<LoginResponse | null> => {
+  try {
+    const rawResponse = await fetch('/auth', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData),
+    });
+    if (rawResponse.status === 401) {
+      return rawResponse;
+    }
+    const response = await rawResponse.json();
+    return response;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
 };
 
 export default fetchProducts;

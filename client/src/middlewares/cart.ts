@@ -13,7 +13,7 @@ export const middlewareAddToCart =
     const cartProduct = state.cart.find((product) => product.id === id);
     const product = state.products.find((product) => product.id === id) as IProductData; // нужна ли эта строчка? мы ведь и так передаем ProductData!
     const prevCount = cartProduct ? cartProduct.quantity : 0;
-    const newQuantity = prevCount + inputCount > product.inStock ? product.inStock : prevCount + inputCount;
+    const newQuantity = product.inStock === 0 ? prevCount: prevCount + inputCount;
     const newProductInCart = {
       id,
       name,
@@ -23,7 +23,7 @@ export const middlewareAddToCart =
     };
     addToCart(newProductInCart)
         .then((resProductData) => {
-          if (resProductData !== undefined) {
+          if (resProductData !== null) {
             dispatch(addedToCart(resProductData));
           }
         })
@@ -35,7 +35,7 @@ export const middlewareFetchCart =
   (dispatch) => {
     fetchCart()
       .then((data) => {
-        if (data !== undefined) {
+        if (data !== null) {
           dispatch(cartFetched(data));
         }
       })

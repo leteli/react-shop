@@ -8,7 +8,7 @@ const initialState: ProductsState = [];
 const productsReducer = (state = initialState, action: AnyAction): ProductsState => {
   switch (action.type) {
     case PRODUCTS_FETCHED: {
-      return [...action.payload];
+      return action.payload;
     }
     case PRODUCT_UPDATED: {
       const newData = action.payload;
